@@ -132,10 +132,13 @@ brew install --quiet --cask "${CaskApps[@]}"
 ##############
 # Install xcode
 ##############
-xcode-select -p &>/dev/null || xcode-select --install
-mas install 497799835
+if [[ "${WANT_XCODE:-0}" != 0 ]]; then
+    # NOTE: installing Xcode requires an apple account login
+    xcode-select -p &>/dev/null || xcode-select --install
+    mas install 497799835
 
-# Set Xcode so that it writes derived data into the project directory.
-# It's unfortunate that this has to be set globally, but other methods didn't work
-defaults write com.apple.dt.Xcode DerivedDataLocationStyle Custom
-defaults write com.apple.dt.Xcode IDECustomDerivedDataLocation ".DerivedData"
+    # Set Xcode so that it writes derived data into the project directory.
+    # It's unfortunate that this has to be set globally, but other methods didn't work
+    defaults write com.apple.dt.Xcode DerivedDataLocationStyle Custom
+    defaults write com.apple.dt.Xcode IDECustomDerivedDataLocation ".DerivedData"
+fi
