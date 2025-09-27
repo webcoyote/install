@@ -67,7 +67,7 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 # Misc
 ##############
 # Hide the dock
-defaults write com.apple.dock autohide -bool true && killall Dock
+defaults write com.apple.dock autohide -bool true && killall Dock &>/dev/null || true
 
 # Disable crash reporting
 defaults write com.apple.CrashReporter DialogType none
